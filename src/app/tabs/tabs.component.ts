@@ -1,10 +1,6 @@
-import {
-    Component,
-    ContentChildren,
-    QueryList,
-    AfterContentInit
-} from '@angular/core';
+import {Component, ContentChildren, QueryList, AfterContentInit, ViewChild} from '@angular/core';
 import {TabComponent} from './tab.component';
+import {DynamicTabAnchorDirective} from './dynamic-tab-anchor.directive';
 
 @Component({
     selector: 'ngx-tabs',
@@ -15,10 +11,16 @@ import {TabComponent} from './tab.component';
             </li>
         </ul>
         <ng-content></ng-content>
+        <ng-template appDynamicTabAnchor></ng-template>
     `
 })
 export class TabsComponent implements AfterContentInit {
     @ContentChildren(TabComponent) tabs: QueryList<TabComponent>;
+    @ViewChild(DynamicTabAnchorDirective) dynamicTabPlaceholder: DynamicTabAnchorDirective;
+
+    openTab() {
+        console.log(this.dynamicTabPlaceholder.viewContainer);
+    }
 
     // contentChildren are set
     ngAfterContentInit() {
@@ -33,7 +35,7 @@ export class TabsComponent implements AfterContentInit {
 
     selectTab(tab: TabComponent) {
         // deactivate all tabs
-        this.tabs.toArray().forEach(tab => (tab.active = false));
+        this.tabs.toArray().forEach( tab => (tab.active = false));
 
         // activate the tab the user has clicked on.
         tab.active = true;

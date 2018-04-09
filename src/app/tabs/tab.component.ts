@@ -2,12 +2,7 @@ import {Component, Input} from '@angular/core';
 
 @Component({
     selector: 'ngx-tab',
-    styles: [
-            `
-            .pane {
-                padding: 1em;
-            }
-        `
+    styles: [ `.pane { padding: 1em; } `
     ],
     template: `
         <div [hidden]="!active" class="pane">

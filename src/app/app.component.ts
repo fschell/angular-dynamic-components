@@ -1,5 +1,6 @@
 import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {PeopleService} from './people/people.service';
+import {TabsComponent} from './tabs/tabs.component';
 
 @Component({
     selector: 'app-root',
@@ -7,7 +8,7 @@ import {PeopleService} from './people/people.service';
         <h1>Angular tabs</h1>
         <ngx-tabs>
             <ngx-tab tabTitle="People List">
-                <app-people-list [people]="people"></app-people-list>
+                <app-people-list [people]="people" (addPerson)="onAddPerson()"></app-people-list>
             </ngx-tab>
             <ngx-tab tabTitle="Tab 2" [template]="personEdit"
             [dataContext]="people[0]"></ngx-tab>
@@ -21,6 +22,7 @@ import {PeopleService} from './people/people.service';
 })
 export class AppComponent implements OnInit, AfterViewInit {
     @ViewChild('personEdit') personEditTemplate;
+    @ViewChild(TabsComponent) tabsComponent;
     people;
 
     constructor(private peopleService: PeopleService) {
@@ -31,7 +33,11 @@ export class AppComponent implements OnInit, AfterViewInit {
             this.people = data;
         });
     }
-    ngAfterViewInit(){
+    ngAfterViewInit() {
         console.log(this.personEditTemplate);
+    }
+
+    onAddPerson() {
+        this.tabsComponent.openTab();
     }
 }
