@@ -9,11 +9,11 @@ import {PeopleService} from './people/people.service';
             <ngx-tab tabTitle="People List">
                 <app-people-list [people]="people"></app-people-list>
             </ngx-tab>
-            <ngx-tab tabTitle="Tab 2">Tab 2 Content</ngx-tab>
+            <ngx-tab tabTitle="Tab 2" [template]="personEdit"></ngx-tab>
         </ngx-tabs>
 
         <ng-template #personEdit>
-          This is the content of the template
+          This is the content of a template defined in another component (in  this case app.component)
         </ng-template>
 
     `
