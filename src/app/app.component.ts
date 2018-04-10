@@ -38,6 +38,6 @@ export class AppComponent implements OnInit, AfterViewInit {
     }
 
     onAddPerson() {
-        this.tabsComponent.openTab();
+        this.tabsComponent.openTab('Dynamic Tab', this.personEditTemplate, this.people[0]);
     }
 }
